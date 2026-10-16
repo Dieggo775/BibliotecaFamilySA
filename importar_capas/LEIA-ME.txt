@@ -1,0 +1,23 @@
+PASTAS DE IMPORTAÇÃO DE CAPAS (uma por perfil)
+==============================================
+Cada pessoa tem a sua pasta:   perfil-1   perfil-2   perfil-3   perfil-4
+(o número é o do perfil na tela de entrada; o sistema mostra o caminho certo
+ na janela "Importar capas").
+
+1. Coloque as imagens baixadas (.jpg, .jpeg, .png ou .webp) na SUA pasta.
+2. Entre no sistema com o seu perfil, clique em "Importar capas" e depois em "Importar agora".
+3. Os originais usados vão para a subpasta "_processadas" (backup).
+   Os arquivos não reconhecidos continuam na pasta, e o sistema diz o motivo.
+
+COMO NOMEAR OS ARQUIVOS
+-----------------------
+- Pelo ID (mais seguro, sempre único):  id-12.jpg   ou   id-12 Watchmen.jpg
+  Em "Importar capas" há o botão "Baixar lista de itens sem capa (CSV)",
+  que já traz o nome de arquivo sugerido para cada item da SUA biblioteca.
+- Pelo título exato:  Watchmen.jpg
+  Título repetido em várias edições? Acrescente a edição: Arlequina 1.jpg
+  Também vale título + subtítulo, ou o ISBN.
+
+DICAS
+- Um perfil só importa para os próprios itens: os IDs dos outros perfis não são aceitos.
+- Se o item já tinha capa, ela é substituída pela nova.

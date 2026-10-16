@@ -1,0 +1,210 @@
+{
+ "tipos": [
+  "HQ / Revista",
+  "Livro",
+  "Graphic Novel",
+  "Mangá",
+  "Outro"
+ ],
+ "grupos": [
+  {
+   "nome": "Identificação",
+   "campos": [
+    {
+     "k": "tipo",
+     "l": "Tipo",
+     "t": "select",
+     "opcoes": "tipos"
+    },
+    {
+     "k": "titulo",
+     "l": "Título",
+     "t": "text",
+     "req": true
+    },
+    {
+     "k": "subtitulo",
+     "l": "Subtítulo",
+     "t": "text"
+    },
+    {
+     "k": "cod",
+     "l": "Cód.",
+     "t": "text"
+    },
+    {
+     "k": "isbn",
+     "l": "ISBN",
+     "t": "text"
+    },
+    {
+     "k": "issn",
+     "l": "ISSN",
+     "t": "text"
+    }
+   ]
+  },
+  {
+   "nome": "Publicação",
+   "campos": [
+    {
+     "k": "editora",
+     "l": "Editora",
+     "t": "text",
+     "sug": true
+    },
+    {
+     "k": "selo",
+     "l": "Selo",
+     "t": "text",
+     "sug": true
+    },
+    {
+     "k": "pais",
+     "l": "País",
+     "t": "text",
+     "sug": true
+    },
+    {
+     "k": "distribuidora",
+     "l": "Distribuído por",
+     "t": "text",
+     "sug": true
+    },
+    {
+     "k": "mes",
+     "l": "Mês",
+     "t": "text"
+    },
+    {
+     "k": "ano",
+     "l": "Ano",
+     "t": "number"
+    },
+    {
+     "k": "idioma",
+     "l": "Idioma",
+     "t": "text",
+     "sug": true
+    },
+    {
+     "k": "paginas",
+     "l": "Páginas",
+     "t": "number"
+    }
+   ]
+  },
+  {
+   "nome": "Série e formato",
+   "campos": [
+    {
+     "k": "edicao",
+     "l": "Nº Edição",
+     "t": "text"
+    },
+    {
+     "k": "colecao",
+     "l": "Coleção (ex.: 2 de 3)",
+     "t": "text"
+    },
+    {
+     "k": "coletanea",
+     "l": "Coletânea",
+     "t": "text",
+     "sug": true
+    },
+    {
+     "k": "mini_serie",
+     "l": "Minissérie",
+     "t": "text"
+    },
+    {
+     "k": "modelo",
+     "l": "Modelo",
+     "t": "text",
+     "sug": true
+    }
+   ]
+  },
+  {
+   "nome": "Créditos",
+   "campos": [
+    {
+     "k": "roteiro",
+     "l": "Roteiro / Autor",
+     "t": "text"
+    },
+    {
+     "k": "desenhos",
+     "l": "Desenhos",
+     "t": "text"
+    },
+    {
+     "k": "arte_final",
+     "l": "Arte final",
+     "t": "text"
+    },
+    {
+     "k": "cores",
+     "l": "Cores",
+     "t": "text"
+    },
+    {
+     "k": "cores_capa",
+     "l": "Cores de capa",
+     "t": "text"
+    },
+    {
+     "k": "letras",
+     "l": "Letras",
+     "t": "text"
+    }
+   ]
+  },
+  {
+   "nome": "Minha coleção",
+   "campos": [
+    {
+     "k": "preco_capa",
+     "l": "Preço de capa (R$)",
+     "t": "number",
+     "step": "0.01"
+    },
+    {
+     "k": "nivel",
+     "l": "Nível (1 a 5)",
+     "t": "number",
+     "min": 1,
+     "max": 5,
+     "pessoal": true
+    },
+    {
+     "k": "condicao",
+     "l": "Condição",
+     "t": "text",
+     "sug": true,
+     "pessoal": true
+    },
+    {
+     "k": "localizacao",
+     "l": "Localização (estante)",
+     "t": "text",
+     "sug": true,
+     "pessoal": true
+    },
+    {
+     "k": "data_aquisicao",
+     "l": "Data de aquisição",
+     "t": "date",
+     "pessoal": true
+    },
+    {
+     "k": "notas",
+     "l": "Observações",
+     "t": "textarea",
+     "pessoal": true
+    }
+   ]
+  }
+ ]
+}

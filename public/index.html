@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Familia S.A.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="login" hidden></div>
+<div id="app" hidden>
+<header>
+  <h1>Familia S.A.</h1>
+  <div class="top"><div class="stats" id="stats"></div><button class="eu" id="eu" title="Meu perfil"></button></div>
+</header>
+<main>
+  <div class="bar">
+    <input id="q" type="search" placeholder="Buscar por título, autor, editora, ISBN…">
+    <select id="fTipo"></select>
+    <select id="fEditora"></select>
+    <select id="fAno"></select>
+    <select id="fCapa"><option value="">Todas as capas</option><option value="sem">Sem capa</option><option value="com">Com capa</option></select>
+    <button id="modo">Ver galeria</button>
+    <button id="impBtn">Importar capas</button>
+    <button class="pri" id="novo">Adicionar item</button>
+    <button id="csv">Exportar CSV</button>
+  </div>
+  <div class="layout" id="layout">
+    <section>
+      <div class="wrap" id="wrap"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
+      <div class="gal" id="gal" hidden></div>
+      <p class="info" id="info"></p>
+    </section>
+    <aside id="det" aria-live="polite"></aside>
+  </div>
+</main>
+</div>
+<dialog id="imp"><div class="imp" id="impc"></div></dialog>
+<dialog id="perfil"><form id="pform" method="dialog"></form></dialog>
+<dialog id="dlg"><form id="form" method="dialog"></form></dialog>
+<script src="js/app.js"></script>
+</body>
+</html>
