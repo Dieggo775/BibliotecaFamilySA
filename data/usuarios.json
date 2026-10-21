@@ -27,11 +27,11 @@
   "id": 3,
   "nome": "Rick",
   "cor": "#2a9d8f",
-  "foto": null,
+  "foto": "3-1792541400995.jpg",
   "senha": "891dbd6b80834db8051ac66bb9618af9:b0876cc8f07f6c4bdea695d3d0e743c83e42776258dc0e7549e41b3970f8a47a",
   "avatar": {
-   "tipo": "emoji",
-   "valor": "🚀",
+   "tipo": "foto",
+   "valor": "3-1792541400995.jpg",
    "fundo": "#2a9d8f"
   }
  },

@@ -2,7 +2,14 @@
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffc83d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Familia S.A.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="img/icone.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="img/icone-180.png">
 <title>Familia S.A.</title>
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
@@ -15,16 +22,21 @@
   <div class="top"><div class="stats" id="stats"></div><button class="eu" id="eu" title="Meu perfil"></button></div>
 </header>
 <main>
-  <div class="bar">
+  <div class="bar" id="bar">
     <input id="q" type="search" placeholder="Buscar por título, autor, editora, ISBN…">
-    <select id="fTipo"></select>
-    <select id="fEditora"></select>
-    <select id="fAno"></select>
-    <select id="fCapa"><option value="">Todas as capas</option><option value="sem">Sem capa</option><option value="com">Com capa</option></select>
+    <button class="so-cel" id="filtrosBtn" aria-expanded="false" aria-controls="mais">Filtros</button>
+    <!-- no computador estes controles ficam soltos na barra; no celular viram um painel aberto pelo botão Filtros -->
+    <div class="mais" id="mais">
+      <select id="fTipo"></select>
+      <select id="fEditora"></select>
+      <select id="fAno"></select>
+      <select id="fCapa"><option value="">Todas as capas</option><option value="sem">Sem capa</option><option value="com">Com capa</option></select>
+      <select class="so-cel" id="ordem" aria-label="Ordenar por"></select>
+      <button id="impBtn">Importar capas</button>
+      <button id="csv">Exportar CSV</button>
+    </div>
     <button id="modo">Ver galeria</button>
-    <button id="impBtn">Importar capas</button>
     <button class="pri" id="novo">Adicionar item</button>
-    <button id="csv">Exportar CSV</button>
   </div>
   <div class="layout" id="layout">
     <section>

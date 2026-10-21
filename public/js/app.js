@@ -10,6 +10,7 @@ const COLS = [['titulo','Título'],['tipo','Tipo'],['editora','Editora'],['edica
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const norm = s => String(s ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 const brl = n => n == null ? '' : n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+const celular = () => matchMedia('(max-width: 700px)').matches;
 
 // Chamada a cada login: carrega a biblioteca do perfil que entrou
 async function entrar(p) {
@@ -18,11 +19,16 @@ async function entrar(p) {
   schema ??= await api('/api/schema');
   sel = null; modo = 'lista'; $('#modo').textContent = 'Ver galeria'; $('#layout').classList.remove('aberto');
   $('#q').value = ''; ['#fTipo', '#fEditora', '#fAno', '#fCapa'].forEach(s => $(s).value = '');
+  sort = { k: 'titulo', d: 1 }; filtros(false);
   await carregar();
   if (ligado) return; // os botões só precisam ser ligados uma vez
   ligado = true;
   $('#thead').innerHTML = '<tr><th></th>' + COLS.map(([k,l]) => `<th data-k="${k}">${l}<span id="s-${k}"></span></th>`).join('') + '</tr>';
   $('#thead').onclick = e => { const k = e.target.closest('th')?.dataset.k; if (!k) return; sort = { k, d: sort.k === k ? -sort.d : 1 }; render(); };
+  // no celular não há cabeçalho de tabela: a ordenação fica neste seletor
+  $('#ordem').innerHTML = COLS.flatMap(([k, l]) => [`<option value="${k}:1">Ordenar: ${l} ↑</option>`, `<option value="${k}:-1">Ordenar: ${l} ↓</option>`]).join('');
+  $('#ordem').oninput = e => { const [k, d] = e.target.value.split(':'); sort = { k, d: +d }; render(); };
+  $('#filtrosBtn').onclick = () => filtros($('#filtrosBtn').getAttribute('aria-expanded') !== 'true');
   ['#q','#fTipo','#fEditora','#fAno','#fCapa'].forEach(s => $(s).oninput = render);
   $('#novo').onclick = () => abrir();
   $('#csv').onclick = exportar;
@@ -31,6 +37,14 @@ async function entrar(p) {
   $('#modo').onclick = () => { modo = modo === 'lista' ? 'galeria' : 'lista'; $('#modo').textContent = modo === 'lista' ? 'Ver galeria' : 'Ver lista'; render(); };
   $('#gal').onclick = e => { const c = e.target.closest('[data-id]'); if (c) selecionar(+c.dataset.id); };
   document.onkeydown = e => { if (e.key === 'Escape' && sel && !$('#dlg').open) fechar(); };
+  window.onpopstate = () => { if (sel != null) fechar(); }; // botão "voltar" do celular fecha os detalhes
+  render(); // no primeiro login o cabeçalho só existe agora, então carregar() não desenhou a lista
+}
+
+// Painel de filtros (só aparece no celular)
+function filtros(abrir) {
+  $('#bar').classList.toggle('aberta', abrir);
+  $('#filtrosBtn').setAttribute('aria-expanded', abrir);
 }
 
 async function carregar() {
@@ -61,6 +75,9 @@ function render() {
   const l = filtrados();
   const gal = modo === 'galeria';
   $('#wrap').hidden = gal; $('#gal').hidden = !gal;
+  const n = ['#fTipo', '#fEditora', '#fAno', '#fCapa'].filter(s => $(s).value).length;
+  $('#filtrosBtn').textContent = n ? `Filtros (${n})` : 'Filtros';
+  $('#ordem').value = `${sort.k}:${sort.d}`;
   if (gal) {
     $('#gal').innerHTML = l.length ? l.map(i => `<figure class="card${i.id === sel ? ' sel' : ''}" data-id="${i.id}">${i.capa ? `<img loading="lazy" alt="Capa de ${esc(i.titulo)}" src="/capas/${esc(i.capa)}">` : '<div class="ph">Sem capa</div>'}<b>${esc(i.titulo)}</b><small>${esc([i.editora, i.ano, i.edicao && '#' + i.edicao].filter(Boolean).join(' · '))}</small></figure>`).join('') : '<p class="vazio">Nenhum item encontrado.</p>';
     $('#info').textContent = `Mostrando ${l.length} de ${itens.length} itens`; return;
@@ -84,8 +101,14 @@ async function excluir(i) {
   if (!confirm(`Excluir "${i.titulo}"? Essa ação não pode ser desfeita.`)) return;
   await api('/api/items/' + i.id, { method: 'DELETE' }); fechar(); carregar();
 }
-function selecionar(id) { sel = id; mostrarDet(); render(); }
-function fechar() { sel = null; $('#layout').classList.remove('aberto'); render(); }
+function selecionar(id) {
+  if (sel == null && celular()) history.pushState({ det: 1 }, ''); // detalhes em tela cheia: "voltar" deve fechá-los
+  sel = id; mostrarDet(); render();
+}
+function fechar() {
+  sel = null; $('#layout').classList.remove('aberto'); render();
+  if (history.state?.det) history.back();
+}
 
 function mostrarDet() {
   const i = itens.find(x => x.id === sel);
@@ -231,6 +254,7 @@ function aplicarTema() {
   const r = document.documentElement.style;
   if (eu) { r.setProperty('--acc', eu.cor); r.setProperty('--acc-ink', tinta(eu.cor)); } else { r.removeProperty('--acc'); r.removeProperty('--acc-ink'); }
   if (eu) { $('#eu').innerHTML = `${avatar(eu, 32)}<span>${esc(eu.nome)}</span>`; document.title = `Biblioteca de ${eu.nome}`; }
+  document.querySelector('meta[name=theme-color]').content = eu ? eu.cor : '#ffc83d'; // barra do navegador no celular
 }
 
 async function mostrarLogin() {

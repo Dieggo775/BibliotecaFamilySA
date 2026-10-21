@@ -94,3 +94,85 @@ dl{display:grid;grid-template-columns:125px 1fr;gap:3px 10px;margin:0}dt{color:v
 #cres button:disabled{opacity:.55;cursor:default}
 #cres img,#cres .sem{width:34px;height:50px;object-fit:cover;border-radius:3px;flex:none}
 #cres small{color:var(--mut);display:block}#cres .okm{color:#1f8a4c}
+
+/* ---- versão celular ---- */
+.mais{display:contents}
+.so-cel{display:none}
+#modo{order:1}#impBtn{order:2}#novo{order:3}#csv{order:4} /* mantém a ordem original dos botões no computador */
+@media(max-width:700px){
+  body{font-size:16px;-webkit-tap-highlight-color:transparent}
+  /* 16px evita o zoom automático do iPhone ao tocar num campo */
+  input,select,textarea,button{font-size:16px;min-height:44px}
+  .so-cel{display:block}
+  header{padding:calc(10px + env(safe-area-inset-top)) 14px 10px;gap:6px 12px;border-bottom-width:4px}
+  h1{font-size:28px}
+  .top{display:contents}
+  .eu{order:1;padding:4px;border-radius:50%;min-height:0}.eu>span:last-child{display:none}
+  .stats{order:2;width:100%;gap:18px}.stats div{text-align:left}.stats b{font-size:20px}.stats span{font-size:11px}
+  main{padding:0 12px calc(96px + env(safe-area-inset-bottom))}
+
+  /* barra de busca fixa no topo; filtros e ações em painel recolhível */
+  .bar{position:sticky;top:0;z-index:3;background:var(--bg);padding:10px 0;margin:0 0 4px;gap:8px}
+  #q{min-width:0;flex:1 1 100%}
+  #filtrosBtn,#modo{flex:1}
+  .mais{display:none}
+  .bar.aberta .mais{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;order:5}
+  .mais select{width:100%;min-width:0}
+  #ordem{grid-column:1/-1}
+  #filtrosBtn[aria-expanded=true]{background:var(--acc);border-color:var(--acc);color:var(--acc-ink)}
+  #novo{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:4;border-radius:28px;padding:12px 22px;box-shadow:0 6px 20px #0006;border:2px solid color-mix(in srgb,var(--acc) 62%,#000)}
+
+  /* lista: cada linha da tabela vira um cartão */
+  .wrap{max-height:none;overflow:visible;background:none;border:0}
+  #thead{display:none}
+  table,tbody{display:block}
+  tr{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px;position:relative;min-height:104px;padding:10px 12px 10px 82px;margin-bottom:8px;background:var(--card);border:1px solid var(--line);border-radius:var(--r)}
+  tr:hover td,tr.sel td{background:none}
+  tr:active{background:color-mix(in srgb,var(--acc) 14%,var(--card))}
+  td{border:0;padding:0;font-size:13px;color:var(--mut);white-space:normal}
+  td:empty{display:none}
+  td:first-child{position:absolute;left:12px;top:10px}
+  td:first-child a{pointer-events:none} /* tocar na capa abre os detalhes, não a imagem solta */
+  td.t{flex:1 1 100%;min-width:0;font-size:16px;font-weight:600;color:var(--ink)}td.t small{font-weight:400}
+  td:nth-child(5)::before{content:"#"}
+  td:last-child{margin-left:auto;font-weight:600;color:var(--ink)}
+  tr:has(.vazio){display:block;padding:0;min-height:0}
+  .vazio{padding:32px 16px}
+
+  /* galeria: 3 colunas */
+  .gal{max-height:none;overflow:visible;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:10px}
+  .card{padding:6px}.card b{font-size:13px}.card small{font-size:11px}
+
+  /* detalhes em tela cheia */
+  body:has(.layout.aberto){overflow:hidden}
+  .aberto #det{width:100vw;box-shadow:none;padding:calc(12px + env(safe-area-inset-top)) 16px calc(24px + env(safe-area-inset-bottom));overscroll-behavior:contain}
+  #det .x{width:44px;height:44px;border-radius:50%;font-size:18px;position:sticky;top:0;z-index:1;box-shadow:0 2px 10px #0004}
+  #det .big{max-height:50vh}
+  #det .ph{text-align:center;padding:16px}
+  #det .acts button{flex:1;padding:10px;font-size:16px}
+  dl{grid-template-columns:minmax(0,110px) 1fr}
+
+  /* diálogos em tela cheia */
+  dialog{width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;margin:0;border-radius:0}
+  form,.imp{max-height:100dvh;overflow:auto;padding:calc(16px + env(safe-area-inset-top)) 16px calc(16px + env(safe-area-inset-bottom))}
+  form h2,.imp h2{font-size:26px}
+  fieldset{padding:8px 10px 12px}
+  .g{grid-template-columns:1fr 1fr}
+  .g label:has(input[type=text]),.g label:has(select){grid-column:1/-1}
+  .fim{flex-wrap:wrap;bottom:calc(-16px - env(safe-area-inset-bottom));padding-bottom:calc(12px + env(safe-area-inset-bottom))}
+  .fim button{flex:1}
+  #msg,#pmsg{flex:1 1 100%;margin:0}
+  .imp .fim{flex-direction:column}
+  .capa img,.capa .sem{width:84px;height:122px}
+  .capa input[type=file]{width:100%;min-height:0}
+  .emo{grid-template-columns:repeat(6,1fr)}
+  .sw button{width:40px;height:40px;min-height:0}
+  .modos button{width:auto;height:auto;min-height:44px;flex:1}
+  .capa div{flex:1;min-width:0}
+
+  /* login */
+  #login{justify-content:flex-start;padding:calc(32px + env(safe-area-inset-top)) 16px 24px}
+  #login h1{font-size:40px}
+  .perfis{grid-template-columns:1fr 1fr;gap:12px}
+  .pf{padding:16px 8px}
+}
