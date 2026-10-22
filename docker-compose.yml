@@ -1,0 +1,11 @@
+services:
+  biblioteca:
+    build: .
+    container_name: biblioteca
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      # Os dados ficam no servidor, fora do container: sobrevivem a rebuilds e atualizações
+      - ./data:/app/data
+      - ./importar_capas:/app/importar_capas

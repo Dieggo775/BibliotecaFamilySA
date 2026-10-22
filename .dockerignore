@@ -1,0 +1,5 @@
+node_modules
+.git
+data
+importar_capas
+*.md
