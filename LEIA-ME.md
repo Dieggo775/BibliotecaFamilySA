@@ -1,9 +1,14 @@
 # Minha Biblioteca — Etapa 1 (front + back)
 
 ## Como rodar
+**Com Docker (recomendado):**
+1. Nesta pasta, rode: `docker compose up -d --build`
+2. Abra http://localhost:3001 (a porta 3000 que aparece no log é a de dentro do container)
+
+**Sem Docker:**
 1. Instale o Node.js (versão 18 ou mais nova): https://nodejs.org
-2. Nesta pasta, rode: `npm install` e depois `npm start`
-3. Abra http://localhost:3000
+2. Nesta pasta, rode: `npm install` e depois `npm start` (para usar outra porta: `PORT=3001 npm start`)
+3. Abra http://localhost:3000 (ou a porta escolhida)
 
 ## Estrutura
 - `server.js`  → API REST (GET/POST/PUT/DELETE em `/api/items`, `/api/stats`) e validação
@@ -20,7 +25,7 @@
 - Ao cadastrar um item novo, a caixa de busca do topo mostra o que outros perfis já cadastraram: um clique copia os dados e a capa.
   Os dados pessoais (nível, condição, localização, data de aquisição, observações) nunca são copiados.
 - **Esqueceu a senha?** Abra `data/usuarios.json`, troque o valor de `"senha"` daquele perfil por `null` e reinicie o servidor: o perfil volta ao primeiro acesso (os itens são mantidos).
-- **Acesso por outros aparelhos:** na mesma rede (Wi-Fi), abra `http://IP-DO-COMPUTADOR:3000` (ex.: `http://192.168.0.10:3000`). Se não abrir, libere a porta 3000 no firewall.
+- **Acesso por outros aparelhos:** na mesma rede (Wi-Fi), abra `http://IP-DO-COMPUTADOR:3001` (ex.: `http://192.168.0.10:3001`; sem Docker, use a porta do `npm start`). Se não abrir, libere essa porta no firewall.
 - Arquivos novos: `usuarios.js` (login e perfis), `data/usuarios.json`, `data/sessoes.json`, `data/avatares/`.
 
 ## Importar capas em lote
