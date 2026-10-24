@@ -1,0 +1,25 @@
+# Dependências (instaladas com npm install / dentro do Docker)
+node_modules/
+
+# Dados sensíveis: hashes de senha, tokens de login e fotos dos perfis
+data/usuarios.json
+data/sessoes.json
+data/avatares/
+
+# Arquivos temporários gravados pelo servidor
+*.tmp
+
+# Imagens em processo de importação (ficam só no servidor)
+importar_capas/perfil-*/*
+!importar_capas/perfil-*/_processadas/
+importar_capas/perfil-*/_processadas/*
+!importar_capas/perfil-*/_processadas/.gitkeep
+
+# Variáveis de ambiente, logs e sistema
+.env
+.env.*
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+.vscode/
